@@ -1,0 +1,11 @@
+th {
+    cursor: pointer;
+}
+
+.btn-sm {
+    margin: 0.5rem;
+}
+
+svg {
+    cursor: pointer;
+}
