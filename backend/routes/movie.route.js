@@ -56,7 +56,7 @@ movieRoute.route('/update/:id').put((req, res, next) => {
 
 // Delete movie
 movieRoute.route('/delete/:id').delete((req, res, next) => {
-    Movie.findOneAndRemove(req.params.id, (error, data) => {
+    Movie.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             return next(error);
         } else {
@@ -67,20 +67,20 @@ movieRoute.route('/delete/:id').delete((req, res, next) => {
     })
 })
 
-// Update like
-movieRoute.route('/update/:id').put((req, res, next) => {
-    Movie.findOneAndUpdate(req.params.id, {
-        $set: req.body
-    }, (error, data) => {
-        if (error) {
-            return next(error);
-            console.log(error)
-        } else {
-            console.log(data)
-            res.json(data)
-            console.log('Data updated successfully')
-        }
-    })
-})
+// Update like --Not working 
+// movieRoute.route('/update/:id').put((req, res, next) => {
+//     Movie.findOneAndUpdate(req.params.id, {
+//         $set: req.body
+//     }, (error, data) => {
+//         if (error) {
+//             return next(error);
+//             console.log(error)
+//         } else {
+//             console.log(data)
+//             res.json(data)
+//             console.log('Data updated successfully')
+//         }
+//     })
+// })
 
 module.exports = movieRoute;
