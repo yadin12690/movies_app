@@ -2,6 +2,9 @@
 ## by Yadin yafe
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
 
+## In a nutshell
+Angular and node.js movie app included CRUD, also have like and save movies.
+
 ## Development server
 
 Angular Development Server
