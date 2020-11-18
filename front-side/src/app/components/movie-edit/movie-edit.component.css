@@ -1,3 +1,7 @@
 .form-control[type="range"] {
     padding: 0;
 }
+
+.mat-slider-horizontal {
+    width: 36rem;
+}

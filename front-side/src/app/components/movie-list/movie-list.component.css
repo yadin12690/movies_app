@@ -1,5 +1,14 @@
+table {
+    width: 90%;
+    margin: 0 auto;
+}
+
 th {
     cursor: pointer;
+}
+
+.edit {
+    padding: 0.5rem;
 }
 
 .btn-sm {

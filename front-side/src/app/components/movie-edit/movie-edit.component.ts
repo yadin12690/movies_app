@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from './../../service/api.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-movie-edit',
   templateUrl: './movie-edit.component.html',
@@ -13,12 +15,13 @@ export class MovieEditComponent implements OnInit {
   submitted = false;
   editForm: FormGroup;
   movieData: Movie[];
-
+  durationInSeconds = 5;
   constructor(
     public fb: FormBuilder,
     private actRoute: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
 
     this.editForm = this.fb.group({
@@ -64,7 +67,10 @@ export class MovieEditComponent implements OnInit {
           this.apiService.updateMovie(this.movieId, this.editForm.value)
             .subscribe(res => {
               this.router.navigateByUrl('/movies-list');
-              console.log('Content updated successfully!')
+              console.log('Content updated successfully!');
+              this._snackBar.open("Movie updated 🎥","",{
+                duration: 2500,
+              })
             }, (error) => {
               console.log(error)
             })
@@ -72,7 +78,10 @@ export class MovieEditComponent implements OnInit {
         else {
           this.apiService.createMovie(this.editForm.value).subscribe(
             (res) => {
-              console.log('Movie successfully created!')
+              console.log('Movie successfully created!');
+              this._snackBar.open("Movie Added! 🎥","",{
+                duration: 2500,
+              })
               this.router.navigateByUrl('/movies-list')
             }, (error) => {
               console.log(error);
@@ -83,3 +92,4 @@ export class MovieEditComponent implements OnInit {
   }
 
 }
+export class PizzaPartyComponent {}

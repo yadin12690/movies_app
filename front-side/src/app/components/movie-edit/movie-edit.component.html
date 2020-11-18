@@ -3,21 +3,22 @@
     <!-- form card register -->
     <div class="card card-outline-secondary">
         <div class="card-header">
-        <h3 class="mb-0">Edit Movie</h3>
+        <h3 class="mb-0">{{this.movieId === null ? 'Add Movie' : 'Edit Movie'}}</h3>
         </div>
         <div class="card-body">
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-
+          <mat-form-field>
+            <mat-label>Name</mat-label>
             <div class="form-group">
-            <label for="inputName">Name</label>
-            <input class="form-control" type="text" formControlName="name">
+            <input class="form-control" matInput type="text" formControlName="name">
               <div class="invalid-feedback" *ngIf="submitted && myForm.name.errors?.required">
                 Name is required.
             </div>
             </div>
+          </mat-form-field>
             <div class="form-group">
             <label for="inputEmail3">Rating</label>
-            <input class="form-control" type="range" min="1" max="10" formControlName="rating">
+            <mat-slider min="1" max="100" step="1" value="1" formControlName="rating"></mat-slider>
             <!-- error -->
               <div class="invalid-feedback" *ngIf="submitted && myForm.rating.errors?.required">
                 Enter your rating.
@@ -37,10 +38,10 @@
               <div class="invalid-feedback" *ngIf="submitted && myForm.pageUrl.errors?.pattern">
                 Enter Numbers Only
             </div>
-            </div>
+          </div>
 
             <div class="form-group">
-            <button class="btn btn-success btn-lg btn-block" type="submit">Update</button>
+            <button class="btn btn-success btn-lg btn-block" mat-stroked-button type="submit">{{this.movieId === null ? 'Add!' : 'Update'}}</button>
             </div>
         </form>
         </div>

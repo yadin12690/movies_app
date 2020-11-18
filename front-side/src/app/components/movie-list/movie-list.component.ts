@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from './../../service/api.service';
 import * as moment from 'moment';
-import { Movie } from 'src/app/model/Movie';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Movie } from 'src/app/model/Movie';
+
 
 @Component({
   selector: 'app-movie-list',
@@ -13,10 +16,12 @@ export class MovieListComponent implements OnInit {
 
   Movie: any = [];
   editForm: FormGroup;
+  dataSource: any=[];
+  displayedColumns: string[] = ['index', 'createdAt', 'name', 'rating', 'pageUrl','likes'];
 
   @Input() likes: boolean;
 
-  constructor(private apiService: ApiService, public fb: FormBuilder,) {
+  constructor(private apiService: ApiService, public fb: FormBuilder,private _snackBar: MatSnackBar) {
     this.readMovie();
   }
 
@@ -24,8 +29,10 @@ export class MovieListComponent implements OnInit {
 
   readMovie() {
     this.apiService.getMovies().subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.Movie = data;
+      this.dataSource=data;
+      console.log(this.dataSource);
     })
   }
 
@@ -33,6 +40,9 @@ export class MovieListComponent implements OnInit {
     if (window.confirm('Are you sure?')) {
       this.apiService.deleteMovie(movie._id).subscribe((data) => {
         this.Movie.splice(index, 1);
+        this._snackBar.open("Movie removed 🎥","",{
+          duration: 2500,
+        })
       }
       )
     }
